@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block content %}
+<h1>{{ expense.description }}</h1>
+
+<p><strong>Group:</strong> {{ expense.group.name }}</p>
+<p><strong>Amount:</strong> ₹{{ expense.amount }}</p>
+<p><strong>Paid by:</strong> {{ expense.paid_by.username }}</p>
+<p><strong>Split Type:</strong> {{ expense.get_split_type_display }}</p>
+<p><strong>Created at:</strong> {{ expense.created_at }}</p>
+<p><strong>Updated at:</strong> {{ expense.updated_at }}</p>
+
+<h2>Participants</h2>
+{% if participants %}
+<h4>Shares</h4>
+<ul>
+  {% for participant in participants %}
+  <li>{{ participant.user.username }}: ₹{{ participant.share_value }}</li>
+  {% endfor %}
+</ul>
+<h4>Amount Dues</h4>
+<ul>
+  {% for participant in participants %}
+  <li>
+    {{ participant.user.username }}: ₹{{ participant.amount_due }}
+    <span></span>
+    {% if participant.amount_due != 0 and participant.user == currentUser %}
+    <a href="{% url 'settlement' participant.id %}">Pay Now</a>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No participants for this expense.</p>
+{% endif %}
+
+<p><a href="{% url 'expense_list' %}">Back to Your Expense List</a></p>
+{% endblock content %}

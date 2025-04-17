@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block content %}
+<form method="post">
+  {% if messages %} {% for message in messages %}
+  <div style="color: red">{{ message }}</div>
+  {% endfor %} {% endif %} {% csrf_token %} {{ form.as_p }}
+
+  <div id="custom-split-fields" style="display: none">
+    <h3>Custom Split:</h3>
+    <div id="custom-members-container">
+      <!-- Group members will be loaded here -->
+    </div>
+  </div>
+
+  <button type="submit">Create Expense</button>
+</form>
+<script>
+  function toggleSplitFields() {
+    const splitType = document.querySelector('[name="split_type"]').value;
+    const customFields = document.getElementById("custom-split-fields");
+    if (splitType === "unequal") {
+      customFields.style.display = "block";
+      customInputs.forEach((input) =>
+        input.setAttribute("required", "required")
+      );
+    } else {
+      customFields.style.display = "none";
+      customInputs.forEach((input) => input.removeAttribute("required"));
+    }
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    toggleSplitFields();
+    document
+      .querySelector('[name="split_type"]')
+      .addEventListener("change", toggleSplitFields);
+    document
+      .querySelector('[name="group"]')
+      .addEventListener("change", loadGroupMembers);
+  });
+
+  function loadGroupMembers() {
+    const groupId = document.querySelector('[name="group"]').value;
+    const container = document.getElementById("custom-members-container");
+    container.innerHTML = "Loading...";
+
+    fetch(`/get-group-members/${groupId}/`)
+      .then((response) => response.json())
+      .then((data) => {
+        container.innerHTML = "";
+        data.members.forEach((member) => {
+          container.innerHTML += `
+                      <label>${member.username}:</label>
+                      <input type="number" step="0.01" name="custom_split_${member.id}" required><br>
+                  `;
+        });
+      });
+  }
+</script>
+{% endblock content %}

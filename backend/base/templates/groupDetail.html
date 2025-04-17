@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %}
+<h1>{{ group.name }}</h1>
+<p>Created At: {{ group.created_at }}</p>
+<p>Updated At: {{ group.updated_at }}</p>
+
+<h2>Members:</h2>
+<ul>
+  {% for member in group.members.all %}
+  <li>{{ member.username }}</li>
+  {% endfor %}
+</ul>
+
+<p>Created By: {{ group.created_by.username }}</p>
+
+<a href="{% url 'group_list' %}">Back to Group List</a>{% endblock content %}
