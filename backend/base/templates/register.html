@@ -1,8 +1,11 @@
 {% extends "base.html" %} {% block content %}
-<h2>Register</h2>
-<form method="post">
+<h1 class="form-heading">Register</h1>
+<form method="post" class="styled-form">
   {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Register</button>
+  <button type="submit" class="form-submit-button">Register</button>
 </form>
-<p>Already have an account? <a href="{% url 'login_page' %}">Login here</a></p>
+<p class="form-text">
+  Already have an account?
+  <a href="{% url 'login_page' %}" class="form-link">Login here</a>
+</p>
 {% endblock content %}

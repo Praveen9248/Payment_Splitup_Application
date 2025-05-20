@@ -1,3 +1,57 @@
 {% extends "base.html" %} {% block content %}
-<h1>INDEX</h1>
+<div class="index-container">
+  <header class="index-header">
+    <h1 class="index-title">Settle Up</h1>
+    <p class="index-tagline">Simplify shared expenses</p>
+  </header>
+
+  <main class="index-main">
+    <section class="index-section">
+      <h2 class="index-section-title">Key Features</h2>
+      <ul class="index-features-list">
+        <li class="index-feature-item">
+          <i class="fas fa-users"></i>
+          <span>Group Expenses:</span> Organize expenses with friends,
+          roommates, or trips.
+        </li>
+        <li class="index-feature-item">
+          <i class="fas fa-calculator"></i>
+          <span>Split Bills Easily:</span> Divide costs equally or unequally.
+        </li>
+        <li class="index-feature-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Track Balances:</span> See who owes whom.
+        </li>
+        <li class="index-feature-item">
+          <i class="fas fa-mobile-alt"></i>
+          <span>Mobile Friendly:</span> Use it on any device.
+        </li>
+      </ul>
+    </section>
+
+    <section class="index-section">
+      <h2 class="index-section-title">How It Works</h2>
+      <ol class="index-how-it-works-list">
+        <li class="index-how-it-works-item">
+          <span>1. Create a Group:</span> Start a group for your friends or
+          trip.
+        </li>
+        <li class="index-how-it-works-item">
+          <span>2. Add Expenses:</span> Record shared expenses.
+        </li>
+        <li class="index-how-it-works-item">
+          <span>3. Settle Up:</span> Pay your dues easily.
+        </li>
+      </ol>
+    </section>
+
+    <section class="index-section">
+      <h2 class="index-section-title">About Us</h2>
+      <p class="index-about-us-text">
+        Settle Up is a web application designed to make sharing expenses simple
+        and stress-free. It's perfect for anyone who shares bills with others.
+      </p>
+    </section>
+  </main>
+</div>
 {% endblock content %}

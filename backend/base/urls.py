@@ -25,6 +25,8 @@ urlpatterns = [
     path('settlement-success/<int:participant_id>/', views.settlementSuccess, name='settlement-success'),
     path('settlement-failed/', views.settlementFailed, name='settlement-failed'),
 
+    path('user_payments/', views.user_payments_view, name='user_payments'),
+
     path('profile/', views.profileView, name='profile_view'),
     path('profile/create/', views.profileCreate, name='profile_create'),
     path('profile/update/', views.profileUpdate, name='profile_update'),

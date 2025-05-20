@@ -1,36 +1,74 @@
 {% extends "base.html" %} {% block content %}
-<h1>{{ expense.description }}</h1>
+<h1 class="expense-detail-heading">{{ expense.description }}</h1>
 
-<p><strong>Group:</strong> {{ expense.group.name }}</p>
-<p><strong>Amount:</strong> ₹{{ expense.amount }}</p>
-<p><strong>Paid by:</strong> {{ expense.paid_by.username }}</p>
-<p><strong>Split Type:</strong> {{ expense.get_split_type_display }}</p>
-<p><strong>Created at:</strong> {{ expense.created_at }}</p>
-<p><strong>Updated at:</strong> {{ expense.updated_at }}</p>
+<div class="expense-detail-block">
+  <p>
+    <span class="expense-detail-label">Group:</span>
+    <b>{{ expense.group.name }}</b>
+  </p>
+  <p>
+    <span class="expense-detail-label">Amount:</span> ₹<b
+      >{{ expense.amount }}</b
+    >
+  </p>
+  <p>
+    <span class="expense-detail-label">Paid by:</span>
+    <b>{{ expense.paid_by.username }}</b>
+  </p>
+  <p>
+    <span class="expense-detail-label">Split Type:</span>
+    <b>{{ expense.get_split_type_display }}</b>
+  </p>
+  <p>
+    <span class="expense-detail-label">Created at:</span>
+    <b>{{ expense.created_at }}</b>
+  </p>
+  <p>
+    <span class="expense-detail-label">Updated at:</span>
+    <b>{{ expense.updated_at }}</b>
+  </p>
+</div>
 
-<h2>Participants</h2>
+<h2 class="expense-detail-participants-heading">Participants</h2>
 {% if participants %}
-<h4>Shares</h4>
-<ul>
-  {% for participant in participants %}
-  <li>{{ participant.user.username }}: ₹{{ participant.share_value }}</li>
-  {% endfor %}
-</ul>
-<h4>Amount Dues</h4>
-<ul>
-  {% for participant in participants %}
-  <li>
-    {{ participant.user.username }}: ₹{{ participant.amount_due }}
-    <span></span>
-    {% if participant.amount_due != 0 and participant.user == currentUser %}
-    <a href="{% url 'settlement' participant.id %}">Pay Now</a>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
+<div class="expense-detail-shares">
+  <h4 class="expense-detail-shares-heading">Shares</h4>
+  <ul class="expense-detail-shares-list">
+    {% for participant in participants %}
+    <li class="expense-detail-shares-item">
+      <b>{{ participant.user.username }}: ₹{{ participant.share_value }}</b>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="expense-detail-dues">
+  <h4 class="expense-detail-dues-heading">Amount Dues</h4>
+  <ul class="expense-detail-dues-list">
+    {% for participant in participants %}
+    <li class="expense-detail-dues-item">
+      <b
+        >{{ participant.user.username }}: ₹<strong
+          >{{ participant.amount_due }}</strong
+        ></b
+      >
+      {% if participant.amount_due != 0 and participant.user == currentUser %}
+      <a
+        href="{% url 'settlement' participant.id %}"
+        class="expense-detail-pay-now"
+        >Pay Now</a
+      >
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 {% else %}
-<p>No participants for this expense.</p>
+<p class="expense-detail-no-participants">No participants for this expense.</p>
 {% endif %}
 
-<p><a href="{% url 'expense_list' %}">Back to Your Expense List</a></p>
+<p>
+  <a href="{% url 'expense_list' %}" class="expense-detail-back-link"
+    >Back to Your Expense List</a
+  >
+</p>
 {% endblock content %}

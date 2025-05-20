@@ -1,14 +1,35 @@
 {% extends "base.html" %} {% block content %}
-<h1>Your Profile</h1>
+<h1 class="profile-heading">Your Profile</h1>
 
 {% if user_profile %}
-<p>Username: {{ user_profile.user.username }}</p>
-<p>First Name: {{ user_profile.user.first_name }}</p>
-<p>Last Name: {{ user_profile.user.last_name }}</p>
-<p>Email: {{ user_profile.user.email }}</p>
-<p>PayPal Email: {{ user_profile.paypal_email }}</p>
-<a href="{% url 'profile_update' %}">Edit Profile</a>
+<div class="profile-info">
+  <p>
+    <span class="profile-label">Username:</span>
+    <b>{{ user_profile.user.username }}</b>
+  </p>
+  <p>
+    <span class="profile-label">First Name:</span>
+    <b>{{ user_profile.user.first_name }}</b>
+  </p>
+  <p>
+    <span class="profile-label">Last Name:</span>
+    <b>{{ user_profile.user.last_name }}</b>
+  </p>
+  <p>
+    <span class="profile-label">Email:</span>
+    <b>{{ user_profile.user.email }}</b>
+  </p>
+  <p>
+    <span class="profile-label">PayPal Email:</span>
+    <b>{{ user_profile.paypal_email }}</b>
+  </p>
+  <a href="{% url 'profile_update' %}" class="profile-button edit-button"
+    >Edit Profile</a
+  >
+</div>
 {% else %}
-<p>No profile information available.</p>
-<a href="{% url 'profile_create' %}">Create Profile</a>
+<p class="profile-no-info">No profile information available.</p>
+<a href="{% url 'profile_create' %}" class="profile-button create-button"
+  >Create Profile</a
+>
 {% endif %}{% endblock content %}

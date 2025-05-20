@@ -1,9 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Django Site</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
   </head>
   <body>
     <header>
@@ -14,11 +16,11 @@
           <li><a href="{% url "profile_view" %}">Profile</a></li>
           <li><a href="{% url "group_list" %}">Groups</a></li>
           <li><a href="{% url "expense_list" %}">Expenses</a></li>
-          <li><a href="#">Payments</a></li>
+          <li><a href="{% url "user_payments" %}">Payments</a></li>
           <li><a href="{% url "logout_page" %}">Logout</a></li>
           {% else %}
           <li><a href="{% url "login_page" %}">Login</a></li>
-          <li><a href="{% url "register_page" %}">Register</a></li>
+          <li><a href="{% url   "register_page" %}">Register</a></li>
           {% endif %}
         </ul>
       </nav>

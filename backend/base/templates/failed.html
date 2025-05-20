@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Payment Failed</title>
-  </head>
-  <body>
-    <h1>Payment Failed</h1>
-    <p>Your payment was unsuccessful. Please try again later.</p>
-    <a href="/payment/">Try again</a>
-    <a href="/">Go back to home</a>
-  </body>
-</html>
+{% extends "base.html" %} {% block content %}
+<h1>Payment Failed</h1>
+<p>Your payment was unsuccessful. Please try again later.</p>
+<a href="/payment/">Try again</a>
+<a href="/">Go back to home</a>
+{% endblock content %}

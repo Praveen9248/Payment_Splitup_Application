@@ -1,22 +1,24 @@
 {% extends "base.html" %} {% block content %}
-<h1>Your Expenses</h1>
-<a href="{% url 'expense_create' %}">Add Expense</a>
+<h1 class="expense-heading">Your Expenses</h1>
+<a href="{% url 'expense_create' %}" class="expense-add-link">Add Expense</a>
 {% if expenses %}
-<ul>
+<ul class="expense-list">
   {% for expense in expenses %}
-  <li>
-    <a href="{% url 'expense_detail' expense.id %}"
+  <li class="expense-item">
+    <a href="{% url 'expense_detail' expense.id %}" class="expense-description"
       >{{ expense.description }}</a
     >
-    (in {{ expense.group.name }}) - Paid by {{ expense.paid_by.username }} -
-    <span>₹{{ expense.amount }}</span> {% if request.user == expense.paid_by %}
-    <span style="color: green">(You Paid)</span>
+    <span class="expense-group"> (in {{ expense.group.name }}) </span>
+    <span class="expense-paid-by">Paid by {{ expense.paid_by.username }}</span>
+    <span class="expense-amount">₹{{ expense.amount }}</span>
+    {% if request.user == expense.paid_by %}
+    <span class="expense-you-paid">(You Paid)</span>
     {% elif expense.is_participant %} {% if expense.amount_owed is not None %}
-    <span style="color: red">(You Owe: ₹{{ expense.amount_owed }})</span>
+    <span class="expense-you-owe">(You Owe: ₹{{ expense.amount_owed }})</span>
     {% endif %} {% endif %}
   </li>
   {% endfor %}
 </ul>
 {% else %}
-<p>No expenses related to you yet.</p>
+<p class="expense-no-expenses">No expenses related to you yet.</p>
 {% endif %}{% endblock content %}

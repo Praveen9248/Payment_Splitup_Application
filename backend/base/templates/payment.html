@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Pay with PayPal</title>
-  </head>
-  <body>
-    <h1>Pay with PayPal</h1>
-    {{ paypal_form.render }}
-  </body>
-</html>
+{% extends "base.html" %} {% block content %}
+<h1 class="paypal-heading">Pay with PayPal</h1>
+<div class="paypal-form-container">{{ paypal_form.render }}</div>
+{% endblock content %}

@@ -307,3 +307,16 @@ def profileUpdate(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+
+def user_payments_view(request):
+    user = request.user
+    # Get payments where the user is the payer or the receiver
+    payments_made = Settlement.objects.filter(payer=user).order_by('-date')
+    payments_received = Settlement.objects.filter(receiver=user).order_by('-date')
+
+    context = {
+        'payments_made': payments_made,
+        'payments_received': payments_received,
+    }
+    return render(request, 'user_payments.html', context)

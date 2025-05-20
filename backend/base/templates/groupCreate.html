@@ -1,6 +1,8 @@
 {% extends "base.html" %} {% block content %}
-<form method="POST">
-  {% csrf_token %} {{form.as_p}}
-  <input type="submit" value="Add" />
+<h1 class="form-heading">Add</h1>
+<form method="POST" class="styled-form">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Add" class="form-submit-button" />
 </form>
-<a href="{% url 'group_list' %}"> Back to Groups </a>{% endblock content %}
+<a href="{% url 'group_list' %}" class="form-cancel-link"> Back to Groups </a>
+{% endblock content %}

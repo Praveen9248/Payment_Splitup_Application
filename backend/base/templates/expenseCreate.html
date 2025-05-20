@@ -1,22 +1,25 @@
 {% extends "base.html" %} {% block content %}
-<form method="post">
+<h1 class="form-heading">Create Expense</h1>
+<form method="post" class="styled-form">
   {% if messages %} {% for message in messages %}
-  <div style="color: red">{{ message }}</div>
+  <div class="form-message" style="color: red">{{ message }}</div>
   {% endfor %} {% endif %} {% csrf_token %} {{ form.as_p }}
 
   <div id="custom-split-fields" style="display: none">
-    <h3>Custom Split:</h3>
-    <div id="custom-members-container">
-      <!-- Group members will be loaded here -->
-    </div>
+    <h3 class="form-sub-heading">Custom Split:</h3>
+    <div id="custom-members-container" class="form-member-inputs"></div>
   </div>
 
-  <button type="submit">Create Expense</button>
+  <button type="submit" class="form-submit-button">Create Expense</button>
 </form>
 <script>
   function toggleSplitFields() {
     const splitType = document.querySelector('[name="split_type"]').value;
     const customFields = document.getElementById("custom-split-fields");
+    const customInputs = document.querySelectorAll(
+      '#custom-members-container input[type="number"]'
+    ); // Select the input fields
+
     if (splitType === "unequal") {
       customFields.style.display = "block";
       customInputs.forEach((input) =>
@@ -48,10 +51,10 @@
         container.innerHTML = "";
         data.members.forEach((member) => {
           container.innerHTML += `
-                      <label>${member.username}:</label>
-                      <input type="number" step="0.01" name="custom_split_${member.id}" required><br>
-                  `;
-        });
+<label class="form-member-label">${member.username}:</label>
+<input type="number" step="0.01" name="custom_split_${member.id}" required class="form-member-input"><br>
+`;
+        }); // You could potentially call toggleSplitFields here again if needed
       });
   }
 </script>

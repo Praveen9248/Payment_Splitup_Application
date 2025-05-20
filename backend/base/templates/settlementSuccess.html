@@ -1,6 +1,8 @@
-<h3>Payment Successful</h3>
-<p>
-  You have successfully paid ₹{{ participant.share_value }} to
+{% extends "base.html" %} {% block content %}
+<h1 class="form-heading">Payment Successful</h1>
+<p class="styled-form">
+    You have successfully paid ₹{{ participant.share_value }} to  
   <b>{{ participant.expense.paid_by.username }}.</b>
 </p>
-<a href="{% url 'expense_list' %}">Go back</a>
+<a href="{% url 'expense_list' %}" class="form-cancel-link">Go back</a>
+{% endblock %}

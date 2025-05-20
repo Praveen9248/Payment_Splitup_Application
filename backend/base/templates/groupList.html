@@ -1,18 +1,24 @@
 {% extends "base.html" %} {% block content %}
-<h1>My Groups</h1>
+<h1 class="groups-heading">My Groups</h1>
 
 {% if groups %}
-<ul>
+<ul class="groups-list">
   {% for group in groups %}
-  <li>
-    <a href="{% url 'group_detail' group_id=group.id %}">{{ group.name }}</a>
-    <small>Created at: {{ group.created_at }}</small>
+  <li class="group-item">
+    <a href="{% url 'group_detail' group_id=group.id %}" class="group-name"
+      >{{ group.name }}</a
+    >
+    <small class="group-date">Created at: {{ group.created_at }}</small>
   </li>
   {% endfor %}
 </ul>
 {% else %}
-<p>You are not a member of any groups yet.</p>
+<p class="groups-no-groups">You are not a member of any groups yet.</p>
 {% endif %}
 
-<p><a href="{% url 'group_create' %}">Create a New Group</a></p>
+<p>
+  <a href="{% url 'group_create' %}" class="groups-create-link"
+    >Create a New Group</a
+  >
+</p>
 {% endblock content %}

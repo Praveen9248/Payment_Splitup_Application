@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block content %}
+<h1>Your Payments</h1>
+
+<h2>Payments Made</h2>
+{% if payments_made %}
+<ul>
+  {% for payment in payments_made %}
+  <li>
+    Paid ₹{{ payment.amount }} to {{ payment.receiver.username }} on {{
+    payment.date|date:"F j, Y, g:i a" }} in group {{payment.group.name}}.
+    Status: {{ payment.status }} {% if payment.paypal_transaction_id %} (PayPal
+    Transaction ID: {{ payment.paypal_transaction_id }}) {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>You have not made any payments.</p>
+{% endif %}
+
+<h2>Payments Received</h2>
+{% if payments_received %}
+<ul>
+  {% for payment in payments_received %}
+  <li>
+    Received ₹{{ payment.amount }} from {{ payment.payer.username }} on {{
+    payment.date|date:"F j, Y, g:i a" }} in group {{payment.group.name}}.
+    Status: {{ payment.status }} {% if payment.paypal_transaction_id %} (PayPal
+    Transaction ID: {{ payment.paypal_transaction_id }}) {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>You have not received any payments.</p>
+{% endif %}
+<a href="{% url 'home_page' %}">Back to Home</a>
+{% endblock content %}
